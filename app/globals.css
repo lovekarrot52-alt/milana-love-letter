@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Manrope:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+* { box-sizing: border-box; }
+
+:root { --rose: #f05b78; --wine: #6e2035; --cream: #fff8f5; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body { font-family: "Manrope", sans-serif; color: var(--wine); background: #f9d9df; }
+
+button { font: inherit; }
+
+.love-page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 40px 18px;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255,255,255,.9), transparent 28%),
+    radial-gradient(circle at 85% 85%, rgba(238,112,142,.35), transparent 34%),
+    linear-gradient(145deg, #fff0ed 0%, #f8ccd7 52%, #f3b8c8 100%);
+}
+
+.love-page::before {
+  content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255,255,255,.65);
+  border-radius: 28px; pointer-events: none;
+}
+
+.glow { position: absolute; width: 300px; height: 300px; border-radius: 50%; filter: blur(60px); opacity: .45; }
+.glow-one { background: white; left: -120px; top: -100px; animation: drift 8s ease-in-out infinite alternate; }
+.glow-two { background: #ee7091; right: -130px; bottom: -120px; animation: drift 10s ease-in-out infinite alternate-reverse; }
+
+.love-card {
+  width: min(740px, 100%); position: relative; z-index: 2; text-align: center;
+  padding: clamp(34px, 7vw, 68px) clamp(22px, 7vw, 72px) 30px;
+  border-radius: 32px; border: 1px solid rgba(255,255,255,.85);
+  background: rgba(255,248,245,.72); backdrop-filter: blur(18px);
+  box-shadow: 0 28px 80px rgba(121,38,61,.17), inset 0 1px 0 white;
+  animation: cardIn 1.1s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.tiny-label { text-transform: uppercase; letter-spacing: .24em; font-size: 11px; font-weight: 600; color: #a94c65; animation: fadeUp .8s .25s both; }
+.tiny-label span { margin: 0 8px; color: var(--rose); }
+
+h1 { margin: 22px 0 20px; font-size: clamp(42px, 8vw, 76px); line-height: .98; letter-spacing: -.055em; font-weight: 500; animation: fadeUp .9s .4s both; }
+h1 em { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; color: var(--rose); letter-spacing: -.035em; }
+
+.lead { margin: 0 auto 30px; color: #854256; font-size: clamp(14px, 2vw, 17px); line-height: 1.8; animation: fadeUp .9s .55s both; }
+
+.heart-button {
+  border: 0; color: white; cursor: pointer; display: inline-flex; align-items: center; gap: 11px;
+  padding: 12px 20px 12px 13px; border-radius: 999px; background: linear-gradient(135deg, #f36c88, #d83f64);
+  box-shadow: 0 12px 28px rgba(216,63,100,.3); transition: transform .25s, box-shadow .25s;
+  animation: fadeUp .9s .7s both;
+}
+.heart-button:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 17px 34px rgba(216,63,100,.38); }
+.heart-button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+.button-heart { display: grid; place-items: center; width: 37px; height: 37px; border-radius: 50%; background: rgba(255,255,255,.22); font-size: 22px; animation: heartbeat 1.5s infinite; }
+.opened .button-heart { animation-duration: .7s; }
+
+.secret { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .8s ease, opacity .8s ease, margin .8s ease; overflow: hidden; margin-top: 0; }
+.secret.visible { grid-template-rows: 1fr; opacity: 1; margin-top: 28px; }
+.secret > * { min-height: 0; }
+.secret p { margin: 0 0 8px; line-height: 1.65; color: #7b3348; }
+.secret strong { font-family: "Cormorant Garamond", Georgia, serif; font-size: 22px; color: var(--rose); }
+.burst { color: var(--rose); letter-spacing: 9px; font-size: 17px; height: 30px; animation: burst .8s both; }
+
+footer { margin-top: 42px; font-size: 10px; text-transform: uppercase; letter-spacing: .18em; color: #ac7180; }
+
+.heart-field { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.floating-heart { position: absolute; bottom: -40px; color: rgba(224,70,106,.35); filter: drop-shadow(0 4px 8px rgba(189,43,77,.12)); animation: floatUp linear infinite; }
+
+@keyframes cardIn { from { opacity: 0; transform: translateY(28px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.2); } 30% { transform: scale(1); } 45% { transform: scale(1.12); } }
+@keyframes floatUp { 0% { transform: translateY(0) rotate(-10deg); opacity: 0; } 12% { opacity: .75; } 85% { opacity: .4; } 100% { transform: translateY(-115vh) rotate(24deg); opacity: 0; } }
+@keyframes drift { to { transform: translate(45px, 35px) scale(1.15); } }
+@keyframes burst { from { transform: scale(.3); opacity: 0; letter-spacing: 0; } to { transform: scale(1); opacity: 1; letter-spacing: 9px; } }
+
+@media (max-width: 520px) {
+  .love-page { padding: 24px 13px; }
+  .love-page::before { inset: 8px; border-radius: 22px; }
+  .love-card { border-radius: 25px; }
+  .lead br { display: none; }
+  footer { margin-top: 32px; line-height: 1.6; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
